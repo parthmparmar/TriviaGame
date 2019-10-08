@@ -18,26 +18,40 @@
         <header class = "row">
             <h1 class = "col-md-12 text-center m-5">Stranger Things - Trivia Game</h1>
         </header>
-
-        <section class = "col-md-12 border">
+        <div class="row">
+            <div class="col-md-12 play_card m-2">
+                <p>Click to play Stranger Things Trivia Game, remember the game is timed. Enjoy and let's see how great a fan you are!</p>
+                <button class="play_btn btn-lg">Play Game!</button>
+            </div>
+        </div>
+        <section class = "game_card col-md-12 border off">
             <div class = "row"> 
+                <div class = "col-md-12 status"></div>
                 <div class="timer col-md-12 text-center m-3">
-                    <h3>Timer Info</h3>
+                    <h3 id="seconds_display">Timer Info</h3>
                 </div>
                 <div class="questions col-md-12 text-center m-3">
-                    <h3>TEST QUESTION</h3>
+                    <h3 id="question">TEST QUESTION</h3>
                 </div>
             </div>
                     <div class="row answers_box">
                         <div class="col-md-12 text-center">
                             <div class="row">
-                                <div id ="a" class="col-md-6 p-3">Option 1</div>
-                                <div id ="b"class="col-md-6 p-3">Option 2</div>
+                                <div id ="a" class="col-md-6 p-3 answers">Option 1</div>
+                                <div id ="b"class="col-md-6 p-3 answers">Option 2</div>
                             </div>
                             <div class="row">
-                                <div id ="c" class="col-md-6 p-3">Option 3</div>
-                                <div id ="d" class="col-md-6 p-3">Option 4</div>
+                                <div id ="c" class="col-md-6 p-3 answers">Option 3</div>
+                                <div id ="d" class="col-md-6 p-3 answers">Option 4</div>
                             </div>
+                        </div>
+                    </div>
+        </section>
+        <section class="col-md-12 results-card off">
+                <div class="row results_box">
+                        <div class="col-md-12">
+                            <h3>Results:</h3>
+                            <div id="results">Result</div>
                         </div>
                     </div>
         </section>
