@@ -5,6 +5,7 @@ var correct = 0;
 var incorrect = 0;
 var question_count = 0;
 var check_timer;
+var check_on;
 
 var play_btn = $(".play_btn");
 var play_card = $(".play_card");
@@ -19,17 +20,18 @@ var seconds_display = $("#seconds_display");
 var question_status = $(".status");
 var results_card = $(".results-card");
 var results = $("#results");
-var check_card = $(".check-card")
-var check_question = $(".question_check")
-var check_answer = $(".answer_check")
+var check_card = $(".check-card");
+var check_question = $(".question_check");
+var check_answer = $(".answer_check");
+var next_question = $(".next_question");
 
 function startup() {
     correct = 0;
     seconds = 30;
     incorrect = 0;
     question_count = 0;
-    active_questions = [q1, q2, q3, q4, q5];
-    results_card.addClass("off")
+    active_questions = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10];
+    results_card.addClass("off");
 };
 
 function random_question() {
@@ -37,7 +39,7 @@ function random_question() {
     selected_question = active_questions[item];
     active_questions.splice(item, 1);
     return selected_question;
-}
+};
 
 function display_question(){
 
@@ -48,7 +50,8 @@ function display_question(){
         play_card.removeClass("off");
         results.text("You correctly answered " + correct + " questions out of " + total_questions + " questions.  Percentage: " + (correct / total_questions).toFixed(2)*100 + " %");
     }
-    else{ 
+    else{
+        check_on = false; 
         var selected_question = random_question();
         question.text(selected_question.question);
         check_question.text(selected_question.question);
@@ -65,12 +68,12 @@ function display_question(){
         game_card.removeClass("off");
         start_timer();
     }
-}
+};
 
 function start_timer() {
     seconds = 30;
     timer = setInterval(one_second, 1000);
-}
+};
 
 function one_second() {
     seconds--;
@@ -78,18 +81,21 @@ function one_second() {
     if(seconds < 1){
         seconds = 30;
         incorrect++;
+        question_status.text("Time's Up!")
         check_display();
     }
-}
+};
 
 function check_display(){
     clearInterval(timer);
     seconds = 30;
     check_card.removeClass("off");
     game_card.addClass("off");
+    check_on = true;
     check_timer = setTimeout(display_question, 3000);
-}
+};
 
+// on click events
 
 play_btn.on("click", function() {
     play_card.addClass("off");
@@ -111,6 +117,14 @@ answers.on("click", function(){
         check_display();
     }
 });
+
+next_question.on("click", function(){
+    if(check_on){
+    console.log("test")
+    clearInterval(check_timer);
+    display_question();
+    }
+})
 
 
 
@@ -157,5 +171,45 @@ q5 = {
     d: "Nancy",
     answer: "b"
 };
-var active_questions = [q1, q2, q3, q4, q5];
+q6 = {
+    question: "To prepare the child actors for their parts, the Duffer Brothers required them to watch which film?",
+    a: "The Goonies",
+    b: "Star Wars",
+    c: "Jaws",
+    d: "Stand by Me",
+    answer: "d"
+};
+q7 = {
+    question: "Natalia Dyer plays which of the show's characters?",
+    a: "Karen",
+    b: "Eleven",
+    c: "Joyce",
+    d: "Nancy",
+    answer: "d"
+};
+q8 = {
+    question: "Which of the show's characters is affected by cleidocranial dysplasia?",
+    a: "Dustin",
+    b: "Mike",
+    c: "Will",
+    d: "Billy",
+    answer: "a"
+};
+q9 = {
+    question: "What skill does Jonathan Byers have?",
+    a: "Plumbing",
+    b: "Photography",
+    c: "Writing",
+    d: "Dancing",
+    answer: "b"
+};
+q10 = {
+    question: "The boys in the show like to meet to play which game?",
+    a: "Atari",
+    b: "Monopoly",
+    c: "Dungeons & Dragons",
+    d: "Nintendo",
+    answer: "c"
+};
+var active_questions = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10];
 var total_questions = active_questions.length;

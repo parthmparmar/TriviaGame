@@ -26,8 +26,23 @@ h3 {
     font-size: 30px;
 }
 
-.answers_box{
-    font-size: 20px;
+p {
+    font-size: 25px;
+    color: #011FFD;
+}
+
+
+.answers {
+    font-size: 30px;
+    color: grey;
+}
+
+.timer {
+    color: #DB659F;
+}
+
+#results {
+    font-size: 25px;
 }
 
 button {
