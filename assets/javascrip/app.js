@@ -19,9 +19,17 @@ var seconds_display = $("#seconds_display");
 var question_status = $(".status");
 var results_card = $(".results-card");
 var results = $("#results");
+var check_card = $(".check-card")
+var check_question = $(".question_check")
+var check_answer = $(".answer_check")
 
 function startup() {
-
+    correct = 0;
+    seconds = 30;
+    incorrect = 0;
+    question_count = 0;
+    active_questions = [q1, q2, q3, q4, q5];
+    results_card.addClass("off")
 };
 
 function random_question() {
@@ -36,18 +44,25 @@ function display_question(){
     if(question_count == total_questions){
         results_card.removeClass("off");
         game_card.addClass("off");
+        check_card.addClass("off");
+        play_card.removeClass("off");
         results.text("You correctly answered " + correct + " questions out of " + total_questions + " questions.  Percentage: " + (correct / total_questions).toFixed(2)*100 + " %");
     }
     else{ 
         var selected_question = random_question();
         question.text(selected_question.question);
+        check_question.text(selected_question.question);
+        var ans_key = selected_question.answer;
         seconds_display.text("Remaining Time: " + seconds + " sec")
         a.text(selected_question.a)
         b.text(selected_question.b)
         c.text(selected_question.c)
         d.text(selected_question.d)
+        check_answer.text("Answer: "+($("#"+ans_key).text()));
         question_status.text("");
         question_count++;
+        check_card.addClass("off");
+        game_card.removeClass("off");
         start_timer();
     }
 }
@@ -63,23 +78,24 @@ function one_second() {
     if(seconds < 1){
         seconds = 30;
         incorrect++;
-        // display_question();
         check_display();
     }
 }
 
 function check_display(){
     clearInterval(timer);
-    check_timer = setTimeout(display_question, 5000);
-    // start_timer();
+    seconds = 30;
+    check_card.removeClass("off");
+    game_card.addClass("off");
+    check_timer = setTimeout(display_question, 3000);
 }
 
 
 play_btn.on("click", function() {
     play_card.addClass("off");
     game_card.removeClass("off");
-    display_question()
-    start_timer();
+    startup();
+    display_question();
 });
 
 answers.on("click", function(){
@@ -87,15 +103,11 @@ answers.on("click", function(){
     if (answer_selected == selected_question.answer){
         correct++;
         question_status.text("Correct!");
-        
-        // display_question();
         check_display();
-        
     }
     else {
         incorrect++;
         question_status.text("Incorrect :-(");
-        // display_question();
         check_display();
     }
 });
