@@ -1,4 +1,8 @@
 # TriviaGame
+
+## Deployed Link
+https://parthmparmar.github.io/TriviaGame/
+
 ## Game Rules
   1. Player clicks "Play Game" to start game
   2. Player has 30 seconds to select the right answer to the question displayed
